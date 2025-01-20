@@ -3,11 +3,15 @@ import { useRef, useEffect } from 'react';
 
 interface VideoPlayerProps {
   videoUrl?: string;
+  videoId?: string;
+  isLoaded?: boolean;
   onTimeUpdate?: (currentTime: number) => void;
 }
 
 export default function VideoPlayer({ 
   videoUrl,
+  videoId = '',
+  isLoaded = false,
   onTimeUpdate 
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -23,7 +27,9 @@ export default function VideoPlayer({
   return (
     <div className="h-full flex flex-col">
       <div className="bg-gray-100 p-3 border-b">
-        <h2 className="font-semibold">Video Player</h2>
+        <h2 className="font-semibold">
+          {isLoaded ? `${videoId} Video` : 'No Video Loaded'}
+        </h2>
       </div>
       <div className="flex-1 bg-black flex items-center justify-center">
         {videoUrl ? (
