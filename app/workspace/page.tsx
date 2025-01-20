@@ -16,7 +16,6 @@ import {
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 export default function Workspace() {
-  const [currentTime, setCurrentTime] = useState(0);
   const [videoId, setVideoId] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,10 +26,6 @@ export default function Workspace() {
   const [loadingCorrected, setLoadingCorrected] = useState(false);
   const [isViewingCorrected, setIsViewingCorrected] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const handleTimeUpdate = (time: number) => {
-    setCurrentTime(time);
-  };
 
   const handleTextChange = (text: string) => {
     setTranscriptText(text);
@@ -147,7 +142,7 @@ export default function Workspace() {
         throw new Error('Failed to save transcript');
       }
 
-      const { success, message, error: responseError } = await response.json();
+      const { success, error: responseError } = await response.json();
       
       if (!success) {
         throw new Error(responseError || 'Failed to save transcript');
@@ -247,7 +242,6 @@ export default function Workspace() {
               videoUrl={videoUrl || undefined}
               videoId={videoId}
               isLoaded={isLoaded}
-              onTimeUpdate={handleTimeUpdate} 
             />
           </div>
         </div>
